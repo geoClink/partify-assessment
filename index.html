@@ -61,7 +61,65 @@
 
         const yearSelect = document.querySelector("#year")
         const makeSelect = document.querySelector("#make")
+        const modelSelect = document.querySelector("#model")
+        const productTypeSelect = document.querySelector("#product-type")
+
+        function populateYears() {
+            const years = [...new Set(data.map(item => item.year))]
+
+            years.forEach (year => {
+                const option = document.createElement("option")
+                option.value = year
+                option.textContent = year
+                yearSelect.appendChild(option)
+            });
+        }
+        populateYears()
         
+        function populateMakes() {
+            makeSelect.innerHTML = `<option>Select Make</option>`
+            const filtered = data.filter(item => item.year === yearSelect.value)
+            const makes = [... new Set(filtered.map(item => item.make))]
+            
+            makes.forEach (make => {
+                const option = document.createElement("option")
+                option.value = make
+                option.textContent = make
+                makeSelect.appendChild(option)
+            });
+        }
+
+        function populateModels() {
+            modelSelect.innerHTML = `<option>Select Model</option>`
+            const filtered = data.filter(item => item.year === yearSelect.value && item.make === makeSelect.value)
+            
+            const models = [... new Set(filtered.map(item => item.model))]
+
+            models.forEach (model => {
+                const option = document.createElement("option")
+                option.value = model
+                option.textContent = model
+                modelSelect.appendChild(option)
+            });
+        }
+
+        function populateProductTypes() {
+            productTypeSelect.innerHTML = `<option>Select Product Type</option>`
+            const filtered = data.filter(item => item.year === yearSelect.value && item.make === makeSelect.value && item.model === modelSelect.value)
+
+            const productType = [... new Set(filtered.map(item => item.productType))]
+
+            productType.forEach (productType => {
+                const option = document.createElement("option")
+                option.value = productType
+                option.textContent = productType
+                productTypeSelect.appendChild(option)
+            });
+        }
+
+        yearSelect.addEventListener("change", populateMakes);
+        makeSelect.addEventListener("change", populateModels);
+        modelSelect.addEventListener("change", populateProductTypes);
     </script>
 </body>
 
