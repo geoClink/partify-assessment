@@ -120,6 +120,18 @@
         yearSelect.addEventListener("change", populateMakes);
         makeSelect.addEventListener("change", populateModels);
         modelSelect.addEventListener("change", populateProductTypes);
+
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function(e) {
+            e.preventDefault()
+
+            const match = data.find(item => item.year === yearSelect.value && item.make === makeSelect.value && item.model === modelSelect.value && item.productType === productTypeSelect.value)
+
+            if (match) {
+                window.location.href = match.url
+            }
+        });
+
     </script>
 </body>
 
