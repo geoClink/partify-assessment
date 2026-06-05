@@ -121,132 +121,107 @@
         </div>
     </main>
     <script>
-        const data = [
-            { year: "2011", make: "RAM", model: "1500", productType: "Front Bumper", url: "https://partifyusa.com/collections/2011-RAM-1500?filter.p.product_type=Front Bumper" },
-            { year: "2012", make: "RAM", model: "1500", productType: "Front Bumper", url: "https://partifyusa.com/collections/2012-RAM-1500?filter.p.product_type=Front Bumper" },
-            { year: "2013", make: "RAM", model: "1500", productType: "Front Bumper", url: "https://partifyusa.com/collections/2013-RAM-1500?filter.p.product_type=Front Bumper" },
-            { year: "2014", make: "RAM", model: "1500", productType: "Front Bumper", url: "https://partifyusa.com/collections/2014-RAM-1500?filter.p.product_type=Front Bumper" },
-            { year: "2015", make: "RAM", model: "1500", productType: "Front Bumper", url: "https://partifyusa.com/collections/2015-RAM-1500?filter.p.product_type=Front Bumper" },
-            { year: "2011", make: "RAM", model: "1500", productType: "Rear Bumper", url: "https://partifyusa.com/collections/2011-RAM-1500?filter.p.product_type=Rear Bumper" },
-            { year: "2012", make: "RAM", model: "1500", productType: "Rear Bumper", url: "https://partifyusa.com/collections/2012-RAM-1500?filter.p.product_type=Rear Bumper" },
-            { year: "2013", make: "RAM", model: "1500", productType: "Rear Bumper", url: "https://partifyusa.com/collections/2013-RAM-1500?filter.p.product_type=Rear Bumper" },
-            { year: "2014", make: "RAM", model: "1500", productType: "Rear Bumper", url: "https://partifyusa.com/collections/2014-RAM-1500?filter.p.product_type=Rear Bumper" },
-            { year: "2015", make: "RAM", model: "1500", productType: "Rear Bumper", url: "https://partifyusa.com/collections/2015-RAM-1500?filter.p.product_type=Rear Bumper" },
-            { year: "2012", make: "RAM", model: "2500", productType: "Tailgate", url: "https://partifyusa.com/collections/2012-RAM-2500?filter.p.product_type=Tailgate" },
-            { year: "2013", make: "RAM", model: "2500", productType: "Tailgate", url: "https://partifyusa.com/collections/2013-RAM-2500?filter.p.product_type=Tailgate" },
-            { year: "2014", make: "RAM", model: "2500", productType: "Tailgate", url: "https://partifyusa.com/collections/2014-RAM-2500?filter.p.product_type=Tailgate" },
-            { year: "2015", make: "RAM", model: "2500", productType: "Tailgate", url: "https://partifyusa.com/collections/2015-RAM-2500?filter.p.product_type=Tailgate" },
-            { year: "2016", make: "RAM", model: "2500", productType: "Tailgate", url: "https://partifyusa.com/collections/2016-RAM-2500?filter.p.product_type=Tailgate" },
-            { year: "2013", make: "Toyota", model: "Camry", productType: "Front Bumper", url: "https://partifyusa.com/collections/2013-Toyota-Camry?filter.p.product_type=Front Bumper" },
-            { year: "2014", make: "Toyota", model: "Camry", productType: "Front Bumper", url: "https://partifyusa.com/collections/2014-Toyota-Camry?filter.p.product_type=Front Bumper" },
-            { year: "2015", make: "Toyota", model: "Camry", productType: "Front Bumper", url: "https://partifyusa.com/collections/2015-Toyota-Camry?filter.p.product_type=Front Bumper" },
-            { year: "2016", make: "Toyota", model: "Camry", productType: "Front Bumper", url: "https://partifyusa.com/collections/2016-Toyota-Camry?filter.p.product_type=Front Bumper" },
-            { year: "2017", make: "Toyota", model: "Corolla", productType: "Front Bumper", url: "https://partifyusa.com/collections/2017-Toyota-Corolla?filter.p.product_type=Front Bumper" },
-            { year: "2013", make: "Toyota", model: "Corolla", productType: "Passenger Side Fender", url: "https://partifyusa.com/collections/2013-Toyota-Corolla?filter.p.product_type=Passenger Side Fender" },
-            { year: "2014", make: "Toyota", model: "Corolla", productType: "Passenger Side Fender", url: "https://partifyusa.com/collections/2014-Toyota-Corolla?filter.p.product_type=Passenger Side Fender" },
-            { year: "2015", make: "Toyota", model: "Corolla", productType: "Passenger Side Fender", url: "https://partifyusa.com/collections/2015-Toyota-Corolla?filter.p.product_type=Passenger Side Fender" },
-            { year: "2016", make: "Toyota", model: "Corolla", productType: "Passenger Side Fender", url: "https://partifyusa.com/collections/2016-Toyota-Corolla?filter.p.product_type=Passenger Side Fender" },
-            { year: "2017", make: "Toyota", model: "Corolla", productType: "Passenger Side Fender", url: "https://partifyusa.com/collections/2017-Toyota-Corolla?filter.p.product_type=Passenger Side Fender" },
-        ]
+        fetch('data.json')
+            .then(res => res.json())
+            .then(data => {
+                const yearSelect = document.querySelector("#year");
+                const makeSelect = document.querySelector("#make");
+                const modelSelect = document.querySelector("#model");
+                const productTypeSelect = document.querySelector("#product-type");
 
-        const yearSelect = document.querySelector("#year");
-        const makeSelect = document.querySelector("#make");
-        const modelSelect = document.querySelector("#model");
-        const productTypeSelect = document.querySelector("#product-type");
+                const submitBtn = document.querySelector("button");
+                function checkForm() {
+                    if (yearSelect.value && makeSelect.value && modelSelect.value && productTypeSelect.value &&
+                        !yearSelect.value.startsWith("Select") &&
+                        !makeSelect.value.startsWith("Select") &&
+                        !modelSelect.value.startsWith("Select") &&
+                        !productTypeSelect.value.startsWith("Select")) {
+                        submitBtn.disabled = false
+                    } else {
+                        submitBtn.disabled = true
+                    }
+                }
 
-        const submitBtn = document.querySelector("button");
-        function checkForm() {
-            if (yearSelect.value && makeSelect.value && modelSelect.value && productTypeSelect.value &&
-                !yearSelect.value.startsWith("Select") &&
-                !makeSelect.value.startsWith("Select") &&
-                !modelSelect.value.startsWith("Select") &&
-                !productTypeSelect.value.startsWith("Select")) {
-                submitBtn.disabled = false
-            } else {
-                submitBtn.disabled = true
-            }
-        }
+                function populateYears() {
+                    const years = [...new Set(data.map(item => item.year))]
 
-        function populateYears() {
-            const years = [...new Set(data.map(item => item.year))]
+                    years.forEach(year => {
+                        const option = document.createElement("option")
+                        option.value = year
+                        option.textContent = year
+                        yearSelect.appendChild(option)
+                    });
+                }
+                populateYears()
 
-            years.forEach(year => {
-                const option = document.createElement("option")
-                option.value = year
-                option.textContent = year
-                yearSelect.appendChild(option)
+                function populateMakes() {
+                    makeSelect.innerHTML = `<option>Select Make</option>`
+                    const filtered = data.filter(item => item.year === yearSelect.value)
+                    const makes = [... new Set(filtered.map(item => item.make))]
+
+                    makes.forEach(make => {
+                        const option = document.createElement("option")
+                        option.value = make
+                        option.textContent = make
+                        makeSelect.appendChild(option)
+                    });
+                }
+
+                function populateModels() {
+                    modelSelect.innerHTML = `<option>Select Model</option>`
+                    const filtered = data.filter(item => item.year === yearSelect.value && item.make === makeSelect.value)
+
+                    const models = [... new Set(filtered.map(item => item.model))]
+
+                    models.forEach(model => {
+                        const option = document.createElement("option")
+                        option.value = model
+                        option.textContent = model
+                        modelSelect.appendChild(option)
+                    });
+                }
+
+                function populateProductTypes() {
+                    productTypeSelect.innerHTML = `<option>Select Product Type</option>`
+                    const filtered = data.filter(item => item.year === yearSelect.value && item.make === makeSelect.value && item.model === modelSelect.value)
+
+                    const productType = [... new Set(filtered.map(item => item.productType))]
+
+                    productType.forEach(productType => {
+                        const option = document.createElement("option")
+                        option.value = productType
+                        option.textContent = productType
+                        productTypeSelect.appendChild(option)
+                    });
+                }
+
+                yearSelect.addEventListener("change", function () {
+                    populateMakes()
+                    checkForm()
+                });
+                makeSelect.addEventListener("change", function () {
+                    populateModels()
+                    checkForm()
+                });
+                modelSelect.addEventListener("change", function () {
+                    populateProductTypes()
+                    checkForm()
+                });
+                productTypeSelect.addEventListener("change", checkForm);
+
+                const form = document.querySelector("form");
+                form.addEventListener("submit", function (e) {
+                    e.preventDefault()
+
+                    const match = data.find(item => item.year === yearSelect.value && item.make === makeSelect.value && item.model === modelSelect.value && item.productType === productTypeSelect.value)
+
+                    if (match) {
+                        window.open(match.url, '_blank')
+                    } else {
+                        alert("Please select a Year, Make, Model, and a Product Type.")
+                    }
+                });
             });
-        }
-        populateYears()
-
-        function populateMakes() {
-            makeSelect.innerHTML = `<option>Select Make</option>`
-            const filtered = data.filter(item => item.year === yearSelect.value)
-            const makes = [... new Set(filtered.map(item => item.make))]
-
-            makes.forEach(make => {
-                const option = document.createElement("option")
-                option.value = make
-                option.textContent = make
-                makeSelect.appendChild(option)
-            });
-        }
-
-        function populateModels() {
-            modelSelect.innerHTML = `<option>Select Model</option>`
-            const filtered = data.filter(item => item.year === yearSelect.value && item.make === makeSelect.value)
-
-            const models = [... new Set(filtered.map(item => item.model))]
-
-            models.forEach(model => {
-                const option = document.createElement("option")
-                option.value = model
-                option.textContent = model
-                modelSelect.appendChild(option)
-            });
-        }
-
-        function populateProductTypes() {
-            productTypeSelect.innerHTML = `<option>Select Product Type</option>`
-            const filtered = data.filter(item => item.year === yearSelect.value && item.make === makeSelect.value && item.model === modelSelect.value)
-
-            const productType = [... new Set(filtered.map(item => item.productType))]
-
-            productType.forEach(productType => {
-                const option = document.createElement("option")
-                option.value = productType
-                option.textContent = productType
-                productTypeSelect.appendChild(option)
-            });
-        }
-
-        yearSelect.addEventListener("change", function() {
-            populateMakes()
-            checkForm()
-        });
-        makeSelect.addEventListener("change", function() {
-            populateModels()
-            checkForm()
-        });
-        modelSelect.addEventListener("change", function() {
-            populateProductTypes()
-            checkForm()
-        });
-        productTypeSelect.addEventListener("change", checkForm);
-
-        const form = document.querySelector("form");
-        form.addEventListener("submit", function (e) {
-            e.preventDefault()
-
-            const match = data.find(item => item.year === yearSelect.value && item.make === makeSelect.value && item.model === modelSelect.value && item.productType === productTypeSelect.value)
-
-            if (match) {
-                window.open(match.url, '_blank')
-            } else {
-                alert("Please select a Year, Make, Model, and a Product Type.")
-            }
-        });
-
     </script>
 </body>
 
