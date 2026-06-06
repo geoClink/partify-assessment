@@ -197,6 +197,10 @@
                     });
                 }
 
+                function isSafeUrl(url) {
+                    return typeof url === 'string' && url.startsWith('https://');
+                }
+
                 yearSelect.addEventListener("change", () => {
                     populateMakes()
                     modelSelect.innerHTML = `<option value="">Select Model</option>`
@@ -221,7 +225,11 @@
                     const match = data.find(item => item.year === yearSelect.value && item.make === makeSelect.value && item.model === modelSelect.value && item.productType === productTypeSelect.value)
 
                     if (match) {
-                        window.open(match.url, '_blank')
+                        if (isSafeUrl(match.url)) {
+                            window.open(match.url, '_blank')
+                        } else {
+                            alert("The part has an invalid link. Please contact support.")
+                        }
                     } else {
                         alert("No parts found for this combination.")
                     }
