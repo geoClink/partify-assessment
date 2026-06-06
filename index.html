@@ -227,7 +227,10 @@
                     }
                 });
             })
-            .catch(err => console.error("Failed to load parts data:", err))
+            .catch(err => {
+                console.error("Failed to load parts data:", err)
+                alert("Something went wrong loading the data. Please try again.")
+        })
 
     </script>
 </body>
