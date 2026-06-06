@@ -13,6 +13,8 @@ Users select their vehicle's Year, Make, Model, and Product Type from cascading 
 - Dynamically constructed collection URLs
 - Submit button disabled until all four fields are selected
 - Scalable structure ready for a larger catalog or API integration
+- Sorted dropdowns — years newest first, makes and models alphabetical
+- Error handling for failed data loads
 
 ## Technologies
 
