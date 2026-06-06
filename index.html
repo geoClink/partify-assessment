@@ -199,9 +199,9 @@
 
                 yearSelect.addEventListener("change", () => {
                     populateMakes()
-                    checkForm()
                     modelSelect.innerHTML = `<option value="">Select Model</option>`
                     productTypeSelect.innerHTML = `<option value="">Select Product Type</option>`
+                    checkForm()
                 });
                 makeSelect.addEventListener("change", () => {
                     populateModels()
