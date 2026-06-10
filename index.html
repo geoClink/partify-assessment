@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partify Parts Finder</title>
-
     <style>
         :root {
             --primary: #3B5DC9;
@@ -96,6 +96,17 @@
         button:disabled {
             background-color: var(--border);
             cursor: not-allowed;
+        }
+
+        @media (max-width: 600px) {
+            .form-card {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>

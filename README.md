@@ -10,7 +10,8 @@ Users select their vehicle's Year, Make, Model, and Product Type from cascading 
 
 - Cascading dropdowns that filter based on previous selections
 - Data fetched from an external JSON file, separating data from logic
-- Dynamically constructed collection URLs
+- URLs sourced directly from data, opening matching collection pages in a new tab
+- Mobile responsive layout with CSS media queries
 - Submit button disabled until all four fields are selected
 - Scalable structure ready for a larger catalog or API integration
 - Sorted dropdowns — years newest first, makes and models alphabetical
